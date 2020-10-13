@@ -2,9 +2,9 @@
 
 {% block content %}
     <h2>Ride Detail</h2>
-    <a href="{% url 'ride_edit' id=ride.id %}">Edit</a>
-    <a href="{% url 'ride_delete' id=ride.id %}">Delete</a>
-    <a href="{% url 'ride_list' %}">Return</a>
+    <a class="btn btn-primary" href="{% url 'ride_edit' id=ride.id %}">Edit</a>
+    <a class="btn btn-danger" href="{% url 'ride_delete' id=ride.id %}">Delete</a>
+    <a class="btn btn-secondary" href="{% url 'ride_list' %}">Return</a>
     <br/>
     {{ ride.ride_date }} - {{ ride.title }} <br/>
     {{ ride.discription }} <br/>

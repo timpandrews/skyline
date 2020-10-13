@@ -6,8 +6,8 @@
     <form method="POST" class="ride-form">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Save</button>
-        <a href="{% url 'ride_list' %}">Cancel</a>
+        <button class="btn btn-primary" type="submit">Save</button>
+        <a class="btn btn-secondary" href="{% url 'ride_list' %}">Cancel</a>
     </form>
 
 {% endblock %}
