@@ -2,6 +2,10 @@ from django.shortcuts import render, get_object_or_404, redirect
 from data.models import Ride
 from data.forms import RideForm
 
+def home(request):
+    return render(request, 'data/home.html', {})
+
+
 def ride_list(request):
     rides = Ride.objects.all().order_by('-ride_date')
     return render(request, 'data/ride_list.html', {'rides': rides})
