@@ -1,0 +1,12 @@
+{% extends 'data/base.html' %}
+
+{% block content %}
+    <h2>Ride List</h2>
+
+    {% for ride in rides %}
+        <div class="ride">
+            {{ ride.ride_date }} - <a href="{% url 'ride_detail' id=ride.id %}">{{ ride.title}}</a>
+        </div>
+    {% endfor %}
+{% endblock %}
+

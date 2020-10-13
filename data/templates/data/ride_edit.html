@@ -1,0 +1,13 @@
+{% extends 'data/base.html' %}
+
+{% block content %}
+    <h2>Ride New/Edit</h2>
+
+    <form method="POST" class="ride-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+        <a href="{% url 'ride_list' %}">Cancel</a>
+    </form>
+
+{% endblock %}

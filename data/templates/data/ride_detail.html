@@ -1,0 +1,17 @@
+{% extends 'data/base.html' %}
+
+{% block content %}
+    <h2>Ride Detail</h2>
+    <a href="{% url 'ride_edit' id=ride.id %}">Edit</a>
+    <a href="{% url 'ride_delete' id=ride.id %}">Delete</a>
+    <a href="{% url 'ride_list' %}">Return</a>
+    <br/>
+    {{ ride.ride_date }} - {{ ride.title }} <br/>
+    {{ ride.discription }} <br/>
+    Time: {{ ride.duration }},
+    Distance: {{ ride.distance }},
+    Average Speed: {{ ride.average_speed }},
+    Calories: {{ ride.calories }} <br/>
+    {{ ride.notes }}
+
+{% endblock %}
