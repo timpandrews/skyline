@@ -1,5 +1,5 @@
 from django.urls import path
-from data import views
+from rides import views
 
 urlpatterns = [
     path('', views.home, name='home'),

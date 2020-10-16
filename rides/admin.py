@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from data.models import Ride
+from rides.models import Ride
 
 @admin.register(Ride)
 class RideAdmin(admin.ModelAdmin):

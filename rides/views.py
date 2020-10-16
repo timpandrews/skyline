@@ -1,19 +1,19 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from data.models import Ride
-from data.forms import RideForm
+from rides.models import Ride
+from rides.forms import RideForm
 
 def home(request):
-    return render(request, 'data/home.html', {})
+    return render(request, 'rides/home.html', {})
 
 
 def ride_list(request):
     rides = Ride.objects.all().order_by('-ride_date')
-    return render(request, 'data/ride_list.html', {'rides': rides})
+    return render(request, 'rides/ride_list.html', {'rides': rides})
 
 
 def ride_detail(request, id):
     ride = get_object_or_404(Ride, id=id)
-    return render(request, 'data/ride_detail.html', {'ride': ride})
+    return render(request, 'rides/ride_detail.html', {'ride': ride})
 
 
 def ride_new(request):
@@ -28,7 +28,7 @@ def ride_new(request):
             return redirect(ride_detail, id=ride.id)
     else:
         form = RideForm()
-    return render(request, 'data/ride_edit.html', {'form': form})
+    return render(request, 'rides/ride_edit.html', {'form': form})
 
 
 def ride_edit(request, id):
@@ -41,7 +41,7 @@ def ride_edit(request, id):
             return  redirect('ride_detail', id=ride.id)
     else:
         form = RideForm(instance=ride)
-    return render(request, 'data/ride_edit.html', {'form': form})
+    return render(request, 'rides/ride_edit.html', {'form': form})
 
 
 def ride_delete(request, id):
