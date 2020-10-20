@@ -2,3 +2,8 @@ h1 {
     color: #5b43d7;
      font-family: "Comic Sans MS", cursive, sans-serif;
 }
+
+.empty {
+    color: #800000;
+    font-style: italic;
+}
