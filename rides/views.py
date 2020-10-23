@@ -50,4 +50,12 @@ def ride_delete(request, id):
     return redirect('ride_list')
 
 
+def import_ride(request):
+    return render(request, 'rides/import_ride.html', {})
+
+
+def charts(request):
+    return render(request, 'rides/charts.html', {})
+
+
 
