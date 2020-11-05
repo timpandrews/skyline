@@ -2,15 +2,32 @@
 
 {% block content %}
     <h2>Import Ride</h2>
-    {% for ride in context.rides %}
-        <p>
-            {{ ride.id }}
-            {{ ride.worldID }}
-            {{ ride.name }}
-            {{ ride.date }}
-            {{ ride.duration }}
-            {{ ride.distance }}
-        </p>
-    {% endfor %}
-
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-auto">World</div>
+            <div class="col-sm-auto">Ride Description</div>
+            <div class="col-sm-auto">Date</div>
+            <div class="col-sm-auto">Duration</div>
+            <div class="col-sm-auto">Distance</div>
+        </div>
+        {% for ride in context.rides %}
+            <div class="row">
+                <div class="col-sm-auto">
+                    {{ ride.zwift_world }}
+                </div>
+                <div class="col-sm-auto">
+                    {{ ride.name }}
+                </div>
+                <div class="col-sm-auto">
+                    {{ ride.ride_date|date:'M j Y g:i A' }}
+                </div>
+                <div class="col-sm-auto">
+                    {{ ride.duration }}
+                </div>
+                <div class="col-sm-auto">
+                    {{ ride.distance }}
+                </div>
+            </div> <!-- /row -->
+        {% endfor %}
+    </div> <!-- /container -->
 {% endblock %}

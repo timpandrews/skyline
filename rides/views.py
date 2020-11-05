@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 import requests
+from datetime import datetime, timedelta
 from rides.models import Ride
 from rides.forms import RideForm
 
@@ -61,17 +62,23 @@ def import_ride(request):
 
     rides = []
     for i, activity in enumerate(activities):
-        print(i, activity['id'])
+        # print(i, activity)
+        print(i, activity['startDate'])
+        # date1 = activity['startDate']
+        date1 = '2020-10-29T21:12:27.455'
+        date2 = datetime.fromisoformat(date1)
+        print(date1, date2)
         rides.append({
             'id': activity['id'],
             'name': activity['name'],
-            'worldId': activity['worldId'],
+            'zwift_world': get_zwift_world(activity['worldId']),
             'date': activity['startDate'],
+            'ride_date': get_ride_date(activity['startDate']),
             'distance': activity['distanceInMeters'],
             'duration': activity['duration'],
         })
 
-    print(rides)
+    # print(rides)
 
     context = {
         'profile': profile_data,
@@ -116,6 +123,54 @@ def init_zwift_client():
     zwift = Client(username, password)
 
     return zwift, zwift_id
+
+
+def get_zwift_world(worldId):
+    # todo: figure out all world ids
+    if worldId == 1:
+        zwift_world = 'Watopia'
+    elif worldId == 2:
+        zwift_world = 'Richmond'
+    elif worldId == 3:
+        zwift_world = 'London'
+    elif worldId == 4:
+        zwift_world = 'New York'
+    elif worldId == 5:
+        zwift_world = 'Innsbruck'
+    elif worldId == 6:
+        zwift_world = 'WorldID6???'
+    elif worldId == 7:
+        zwift_world = 'Yorkshire'
+    elif worldId == 8:
+        zwift_world = 'WorldID8'
+    elif worldId == 9:
+        zwift_world = 'WorldID9'
+    elif worldId == 10:
+        zwift_world = 'France'
+    elif worldId == 11:
+        zwift_world = 'Paris'
+    else:
+        zwift_world = 'other'
+
+    return zwift_world
+
+
+def get_ride_date(date_string):
+    """
+    Takes date string ending in +0000 and strips off
+    +0000 and then converts to date object
+    """
+    date_string = date_string[:-5]
+    date_obj = datetime.fromisoformat(date_string)
+
+    # subtract 4 hours to account for timezones
+    # todo: dynamically adjust time for timezones
+    date_obj = date_obj - timedelta(hours=4)
+
+
+    return date_obj
+
+
 
 
 
