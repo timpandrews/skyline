@@ -62,20 +62,15 @@ def import_ride(request):
 
     rides = []
     for i, activity in enumerate(activities):
-        # print(i, activity)
-        print(i, activity['startDate'])
-        # date1 = activity['startDate']
-        date1 = '2020-10-29T21:12:27.455'
-        date2 = datetime.fromisoformat(date1)
-        print(date1, date2)
+
         rides.append({
             'id': activity['id'],
             'name': activity['name'],
             'zwift_world': get_zwift_world(activity['worldId']),
             'date': activity['startDate'],
             'ride_date': get_ride_date(activity['startDate']),
-            'distance': activity['distanceInMeters'],
-            'duration': activity['duration'],
+            'distance': get_miles_from_meters(activity['distanceInMeters']),
+            'duration': get_duration_string(activity['movingTimeInMs'], 'ms'),
         })
 
     # print(rides)
@@ -169,6 +164,50 @@ def get_ride_date(date_string):
 
 
     return date_obj
+
+
+def get_duration_string(duration, duration_type):
+    """
+    duration:           in seconds or milliseconds
+    duration_type:      s=seconds, ms=milliseconds
+    return:             duration_string as formated string
+
+    Takes ride duration as seconds or milliseconds, takes
+    duration type aseither s(seconds) or ms(milliseconds) and
+    converts to string for display
+    """
+    if duration_type == "ms":
+        seconds = duration / 1000
+    else:
+        seconds = duration
+
+    min, sec = divmod(seconds, 60)
+    hour, min = divmod(min, 60)
+
+    hour = round(hour)
+    min = round(min)
+    sec = round(sec)
+
+    if hour > 0:
+        duration_string = f"{hour}h {min}m"
+    else:
+        duration_string = f"{min}m {sec}s"
+
+    return duration_string
+
+
+def get_miles_from_meters(meters):
+    """
+
+    """
+    miles = meters / 1609
+    miles = round(miles, 2)
+
+    return miles
+
+
+
+
 
 
 

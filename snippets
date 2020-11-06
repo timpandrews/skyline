@@ -1,0 +1,8 @@
+http://www.strava.com/oauth/authorize
+    ?client_id=23818
+    &response_type=code
+    &redirect_uri=http://localhost/exchange_token
+    &approval_prompt=force
+    &scope=read_all,profile:read_all,activity:read_all
+
+curl -X POST https://www.strava.com/oauth/token -F client_id=23818 -F client_secret=099a550d6891cf26b98c047107bbb1b5a12b79cb -F code=8583e1b989758302f2c9e3c9e76d1648a3703592 -F grant_type=authorization_code

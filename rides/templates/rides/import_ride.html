@@ -2,32 +2,59 @@
 
 {% block content %}
     <h2>Import Ride</h2>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-2">World</div>
-            <div class="col-4">Ride Description</div>
-            <div class="col-2">Date</div>
-            <div class="col-2">Duration</div>
-            <div class="col-2">Distance</div>
-        </div>
-        {% for ride in context.rides %}
-            <div class="row">
-                <div class="col-2">
-                    {{ ride.zwift_world }}
-                </div>
-                <div class="col-4">
-                    {{ ride.name }}
-                </div>
-                <div class="col-2">
-                    {{ ride.ride_date|date:'M j Y g:i A' }}
-                </div>
-                <div class="col-2">
-                    {{ ride.duration }}
-                </div>
-                <div class="col-2">
-                    {{ ride.distance }}
-                </div>
-            </div> <!-- /row -->
-        {% endfor %}
+    1<i class="fas fa-user"></i> <!-- uses solid style -->
+    2<i class="far fa-user"></i> <!-- uses regular style -->
+    3<i class="fal fa-user"></i> <!-- uses light style -->
+    <!--brand icon-->
+    4<i class="fab fa-github-square"></i> <!-- uses brands style -->
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">World</th>
+                <th scope="col">Ride Description</th>
+                <th scope="col">Date</th>
+                <th scope="col">Duration</th>
+                <th scope="col">Distance</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ride in context.rides %}
+                <tr>
+                    <td scope="col">
+                        <button type="button" class="btn btn-primary btn-sm">
+                            Import Ride
+                        </button>
+                    </td>
+                    <td scope="col">
+                        {{ ride.zwift_world }}
+                    </td>
+                    <td scope="col">
+                        {{ ride.name }}
+                    </td>
+                    <td scope="col">
+                        {{ ride.ride_date|date:'M j Y g:i A' }}
+                    </td>
+                    <td scope="col">
+                        {{ ride.duration }}
+                    </td>
+                    <td scope="col">
+                        {{ ride.distance }} mi
+                    </td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <td></td>
+                <td colspan="5">
+                    <input type="submit" class="btn btn-info" value="Select Ride to be Imported">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+
+
     </div> <!-- /container -->
 {% endblock %}
