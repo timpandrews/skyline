@@ -2,29 +2,29 @@
 
 {% block content %}
     <h2>Import Ride</h2>
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-auto">World</div>
-            <div class="col-sm-auto">Ride Description</div>
-            <div class="col-sm-auto">Date</div>
-            <div class="col-sm-auto">Duration</div>
-            <div class="col-sm-auto">Distance</div>
+            <div class="col-2">World</div>
+            <div class="col-4">Ride Description</div>
+            <div class="col-2">Date</div>
+            <div class="col-2">Duration</div>
+            <div class="col-2">Distance</div>
         </div>
         {% for ride in context.rides %}
             <div class="row">
-                <div class="col-sm-auto">
+                <div class="col-2">
                     {{ ride.zwift_world }}
                 </div>
-                <div class="col-sm-auto">
+                <div class="col-4">
                     {{ ride.name }}
                 </div>
-                <div class="col-sm-auto">
+                <div class="col-2">
                     {{ ride.ride_date|date:'M j Y g:i A' }}
                 </div>
-                <div class="col-sm-auto">
+                <div class="col-2">
                     {{ ride.duration }}
                 </div>
-                <div class="col-sm-auto">
+                <div class="col-2">
                     {{ ride.distance }}
                 </div>
             </div> <!-- /row -->
