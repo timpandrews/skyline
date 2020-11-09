@@ -1,0 +1,15 @@
+{% extends 'rides/base.html' %}
+
+{% block content %}
+    <h2>Import Ride</h2>
+    {% if context.status == 'success' %}
+        <div class="alert alert-success" role="alert">
+            Successfully imported ride <strong>{{ context.ride.title }}({{ context.ride.ride_date }})</strong>
+        </div>
+        <a href="ride/238">View Ride Detail</a>
+    {% else %}
+        <div class="alert alert-danger" role="alert">
+            Failed to imported ride
+        </div>
+    {% endif %}
+{% endblock %}

@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 import requests
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 from rides.models import Ride
 from rides.forms import RideForm
 
@@ -58,11 +58,8 @@ def import_ride(request):
     profile_data = profile.profile
     activities = profile.get_activities()
 
-    # print (activities[0]['id'])
-
     rides = []
     for i, activity in enumerate(activities):
-
         rides.append({
             'id': activity['id'],
             'name': activity['name'],
@@ -82,6 +79,43 @@ def import_ride(request):
     }
 
     return render(request, 'rides/import_ride.html', {'context': context})
+
+
+def import_ride_add(request):
+    zwift_ride_id = request.GET.get('id')
+    print("zwift_ride_id:", zwift_ride_id)
+    zwift, zwift_id = init_zwift_client()
+    activity = zwift.get_activity(zwift_id)
+    zrd = activity.get_activity(zwift_ride_id)  # ZwiftRideData (zrd)
+    print(zrd['startDate'])
+
+    if zwift_ride_id:
+        print("***************")
+        ride = Ride.objects.create(
+            ride_date=zrd['startDate'],
+            title=zrd['name'],
+            duration=timedelta(seconds=zrd['movingTimeInMs']/1000),
+            distance=get_miles_from_meters(zrd['distanceInMeters']),
+            average_speed=get_miles_from_meters(zrd['avgSpeedInMetersPerSecond']*3600),
+            calories=zrd['calories']
+        )
+        try:
+            ride.save()
+            print("***ride.id****:", ride.id)
+            ride = get_object_or_404(Ride, id=ride.id)
+            context = {
+                'ride': ride,
+                'status': 'success',
+            }
+        except Exception as e:
+            print(f'{e.message,} ({type(e)})')
+            context = {
+                'ride': ride,
+                'status': 'fail'
+            }
+
+        return render(request, 'rides/import_ride_confirmation.html', {'context': context} )
+
 
 
 def view_data(request):
@@ -161,7 +195,6 @@ def get_ride_date(date_string):
     # subtract 4 hours to account for timezones
     # todo: dynamically adjust time for timezones
     date_obj = date_obj - timedelta(hours=4)
-
 
     return date_obj
 

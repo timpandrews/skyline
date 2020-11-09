@@ -2,15 +2,11 @@
 
 {% block content %}
     <h2>Import Ride</h2>
-    1<i class="fas fa-user"></i> <!-- uses solid style -->
-    2<i class="far fa-user"></i> <!-- uses regular style -->
-    3<i class="fal fa-user"></i> <!-- uses light style -->
-    <!--brand icon-->
-    4<i class="fab fa-github-square"></i> <!-- uses brands style -->
     <table class="table">
         <thead>
             <tr>
                 <th scope="col"></th>
+                <th scope="col">Status</th>
                 <th scope="col">World</th>
                 <th scope="col">Ride Description</th>
                 <th scope="col">Date</th>
@@ -22,9 +18,12 @@
             {% for ride in context.rides %}
                 <tr>
                     <td scope="col">
-                        <button type="button" class="btn btn-primary btn-sm">
-                            Import Ride
-                        </button>
+                        <a class="btn btn-primary" href="/import_ride_add?id={{ ride.id }}" role="button" alt="import this ride">
+                            <i class="fas fa-check-circle"></i>
+                        </a>
+                    </td>
+                    <td scope="col">
+                        New
                     </td>
                     <td scope="col">
                         {{ ride.zwift_world }}
@@ -43,18 +42,7 @@
                     </td>
                 </tr>
             {% endfor %}
-            <tr>
-                <td></td>
-                <td colspan="5">
-                    <input type="submit" class="btn btn-info" value="Select Ride to be Imported">
-                </td>
-            </tr>
         </tbody>
     </table>
 
-
-
-
-
-    </div> <!-- /container -->
 {% endblock %}

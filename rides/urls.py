@@ -9,6 +9,7 @@ urlpatterns = [
     path('ride/<int:id>/edit/', views.ride_edit, name='ride_edit'),
     path('ride/<int:id>/delete/', views.ride_delete, name='ride_delete'),
     path('import_ride', views.import_ride, name='import_ride'),
+    path('import_ride_add', views.import_ride_add, name='import_ride_add'),
     path('charts', views.charts, name='charts'),
     path('view_data', views.view_data, name='view_data'),
 ]

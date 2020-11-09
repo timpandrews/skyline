@@ -6,7 +6,7 @@ from django.utils import timezone
 
 
 class Ride(models.Model):
-    ride_date = models.DateField()
+    ride_date = models.DateTimeField()
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True)
     duration = models.DurationField()

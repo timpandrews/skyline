@@ -6,3 +6,23 @@ http://www.strava.com/oauth/authorize
     &scope=read_all,profile:read_all,activity:read_all
 
 curl -X POST https://www.strava.com/oauth/token -F client_id=23818 -F client_secret=099a550d6891cf26b98c047107bbb1b5a12b79cb -F code=8583e1b989758302f2c9e3c9e76d1648a3703592 -F grant_type=authorization_code
+
+        if ride.id:
+            context = {
+                'ride': ride,
+                'status': 'success',
+            }
+        else:
+            context = {
+                'ride': ride,
+                'status': 'fail'
+            }
+
+
+   ride = Ride(
+            ride_date=get_ride_date(zrd['startDate']),
+            title=zrd['name'],
+            duration=get_duration_string(zrd['movingTimeInMs'], 'ms'),
+            distance=get_miles_from_meters(zrd['distanceInMeters']),
+            average_speed=zrd['avgSpeedInMetersPerSecond']
+        )

@@ -120,12 +120,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-# STATICFILES_DIRS = ('/home/tim/apps/skyline/static', )
-
-print("base_dir:", BASE_DIR)
-print("static_url:", STATIC_URL)
-print("static_root:", STATIC_ROOT)
-# print("staticfiles_dirs:", STATICFILES_DIRS)
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
