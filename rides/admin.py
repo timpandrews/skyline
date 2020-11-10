@@ -5,9 +5,9 @@ from rides.models import Ride
 @admin.register(Ride)
 class RideAdmin(admin.ModelAdmin):
     list_display = (
+        'title',
         'id',
         'start_time',
-        'title',
         'description',
         'duration',
         'distance',

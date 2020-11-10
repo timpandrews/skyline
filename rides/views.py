@@ -89,11 +89,11 @@ def import_ride(request):
 
 def import_ride_add(request):
     zwift_ride_id = request.GET.get('id')
-    print("zwift_ride_id:", zwift_ride_id)
     zwift, zwift_id = init_zwift_client()
     activity = zwift.get_activity(zwift_id)
     zrd = activity.get_activity(zwift_ride_id)  # ZwiftRideData (zrd)
-    print(zrd['startDate'])
+    print(zrd['totalElevation'])
+    print(zrd['totalElevation']*3.281)
 
     if zwift_ride_id:
         print("***************")
@@ -102,14 +102,23 @@ def import_ride_add(request):
             ride_native_id=zwift_ride_id,
             start_time=zrd['startDate'],
             title=zrd['name'],
+            description='',
             duration=timedelta(seconds=zrd['movingTimeInMs']/1000),
             distance=get_miles_from_meters(zrd['distanceInMeters']),
+            elevation=get_converted_value(zrd['totalElevation'],'metersToFeet'),
             avg_speed=get_miles_from_meters(zrd['avgSpeedInMetersPerSecond']*3600),
-            calories=zrd['calories']
+            max_speed=get_miles_from_meters(zrd['maxSpeedInMetersPerSecond']*3600),
+            avg_heart_rate=zrd['avgHeartRate'],
+            max_heart_rate=zrd['maxHeartRate'],
+            avg_watts=zrd['avgWatts'],
+            max_watts=zrd['maxWatts'],
+            avg_cadence=zrd['avgCadenceInRotationsPerMinute'],
+            max_cadence=zrd['maxCadenceInRotationsPerMinute'],
+            calories=zrd['calories'],
+            notes=''
         )
         try:
             ride.save()
-            print("***ride.id****:", ride.id)
             ride = get_object_or_404(Ride, id=ride.id)
             context = {
                 'ride': ride,
@@ -262,8 +271,14 @@ def get_ride_status(id, ride_type):
     return status
 
 
+def get_converted_value(value, conversion_type):
+    """
 
+    """
+    if conversion_type == 'metersToFeet':
+        converted_value = value * 3.281
 
+    return converted_value
 
 
 
