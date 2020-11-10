@@ -6,12 +6,12 @@ from rides.models import Ride
 class RideAdmin(admin.ModelAdmin):
     list_display = (
         'id',
-        'ride_date',
+        'start_time',
         'title',
         'description',
         'duration',
         'distance',
-        'average_speed',
+        'avg_speed',
         'calories'
     )
-    ordering = ('-ride_date', 'id')
+    ordering = ('-id',)

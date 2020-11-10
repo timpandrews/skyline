@@ -5,7 +5,7 @@
 
     {% for ride in rides %}
         <div class="ride">
-            {{ ride.ride_date }} - <a href="{% url 'ride_detail' id=ride.id %}">{{ ride.title}}</a>
+            {{ ride.start_time }} - <a href="{% url 'ride_detail' id=ride.id %}">{{ ride.title}}</a>
         </div>
     {% empty %}
         <div class="ride">

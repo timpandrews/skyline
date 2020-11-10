@@ -6,12 +6,14 @@ from django.utils import timezone
 
 
 class Ride(models.Model):
-    ride_date = models.DateTimeField()
+    ride_type = models.CharField(max_length=10)
+    ride_native_id = models.CharField(max_length=200)
+    start_time = models.DateTimeField()
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True)
     duration = models.DurationField()
     distance = models.DecimalField(max_digits=6, decimal_places=2)
-    average_speed = models.DecimalField(max_digits=5, decimal_places=2)
+    avg_speed = models.DecimalField(max_digits=5, decimal_places=2)
     calories = models.PositiveSmallIntegerField(blank=True)
     notes = models.TextField(blank=True)
 

@@ -9,7 +9,7 @@ def home(request):
 
 
 def ride_list(request):
-    rides = Ride.objects.all().order_by('-ride_date')
+    rides = Ride.objects.all().order_by('-start_time')
     return render(request, 'rides/ride_list.html', {'rides': rides})
 
 
@@ -60,15 +60,21 @@ def import_ride(request):
 
     rides = []
     for i, activity in enumerate(activities):
-        rides.append({
-            'id': activity['id'],
-            'name': activity['name'],
-            'zwift_world': get_zwift_world(activity['worldId']),
-            'date': activity['startDate'],
-            'ride_date': get_ride_date(activity['startDate']),
-            'distance': get_miles_from_meters(activity['distanceInMeters']),
-            'duration': get_duration_string(activity['movingTimeInMs'], 'ms'),
-        })
+        if activity['movingTimeInMs']:
+            # if activity already exists
+
+            rides.append({
+                'id': activity['id'],
+                'status': get_ride_status(activity['id'], 'zwift'),
+                'name': activity['name'],
+                'zwift_world': get_zwift_world(activity['worldId']),
+                'date': activity['startDate'],
+                'ride_date': get_ride_date(activity['startDate']),
+                'distance': get_miles_from_meters(activity['distanceInMeters']),
+                'duration': get_duration_string(activity['movingTimeInMs'], 'ms'),
+            })
+        else:
+            print('warning: null ride')
 
     # print(rides)
 
@@ -92,11 +98,13 @@ def import_ride_add(request):
     if zwift_ride_id:
         print("***************")
         ride = Ride.objects.create(
-            ride_date=zrd['startDate'],
+            ride_type='zwift',
+            ride_native_id=zwift_ride_id,
+            start_time=zrd['startDate'],
             title=zrd['name'],
             duration=timedelta(seconds=zrd['movingTimeInMs']/1000),
             distance=get_miles_from_meters(zrd['distanceInMeters']),
-            average_speed=get_miles_from_meters(zrd['avgSpeedInMetersPerSecond']*3600),
+            avg_speed=get_miles_from_meters(zrd['avgSpeedInMetersPerSecond']*3600),
             calories=zrd['calories']
         )
         try:
@@ -115,7 +123,6 @@ def import_ride_add(request):
             }
 
         return render(request, 'rides/import_ride_confirmation.html', {'context': context} )
-
 
 
 def view_data(request):
@@ -210,6 +217,7 @@ def get_duration_string(duration, duration_type):
     converts to string for display
     """
     if duration_type == "ms":
+        # print("duration:", duration)
         seconds = duration / 1000
     else:
         seconds = duration
@@ -238,6 +246,20 @@ def get_miles_from_meters(meters):
 
     return miles
 
+
+def get_ride_status(id, ride_type):
+    """
+
+    """
+    if ride_type == 'zwift':
+         if Ride.objects.filter(ride_native_id=id):
+             status = "present"
+         else:
+             status = "new"
+    else:
+        status = "error"
+
+    return status
 
 
 

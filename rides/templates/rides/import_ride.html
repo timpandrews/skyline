@@ -1,7 +1,17 @@
 {% extends 'rides/base.html' %}
 
 {% block content %}
-    <h2>Import Ride</h2>
+    <h2>Import Rides</h2>
+    <div class="card w-75 bg-primary">
+        <div class="card-body">
+            <h5 class="card-title">Import Rides from Zwift</h5>
+            <p class="card-text">
+                Listing of your recent rides from Zwift. See which rides have
+                already been imported, select new rides to be imported.
+            </p>
+        </div>
+    </div>
+
     <table class="table">
         <thead>
             <tr>
@@ -17,14 +27,36 @@
         <tbody>
             {% for ride in context.rides %}
                 <tr>
-                    <td scope="col">
-                        <a class="btn btn-primary" href="/import_ride_add?id={{ ride.id }}" role="button" alt="import this ride">
-                            <i class="fas fa-check-circle"></i>
-                        </a>
-                    </td>
-                    <td scope="col">
-                        New
-                    </td>
+                    {% if ride.status == 'new' %}
+                        <td scope="col">
+                            <a class="btn btn-success" href="/import_ride_add?id={{ ride.id }}" role="button" alt="import this ride">
+                                <i class="fas fa-check-circle"></i>
+                            </a>
+                        </td>
+                        <td scope="col">
+                            New
+                        </td>
+                    {% elif ride.status == 'present' %}
+                        <td scope="col">
+                            <button class="btn btn-primary" disabled>
+                                <i class="fas fa-check-circle"></i>
+                            </button>
+                        </td>
+                        <td scope="col">
+                            Present
+                        </td>
+                    {% else %}
+                        <td scope="col">
+                            <button class="btn btn-warning" disabled>
+                                <i class="fas fa-exclamation-circle"></i>
+                            </button>
+                        </td>
+                        <td scope="col">
+                            Error
+                        </td>
+                    {% endif %}
+
+
                     <td scope="col">
                         {{ ride.zwift_world }}
                     </td>

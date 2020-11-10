@@ -6,12 +6,12 @@ class RideForm(forms.ModelForm):
     class Meta:
         model = Ride
         fields = (
-            'ride_date',
+            'start_time',
             'title',
             'description',
             'duration',
             'distance',
-            'average_speed',
+            'avg_speed',
             'calories',
             'notes'
         )
