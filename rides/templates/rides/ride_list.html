@@ -32,10 +32,11 @@
                     <td>{{ ride.calories }}</td>
                     <td>
                         <a href="{% url 'ride_detail' id=ride.id %}" alt="View Detail">
-                            <i class="fas fa-clipboard-list-check"></i>
+                            <i class="far fa-clipboard-list-check fa-lg"></i>
                         </a>
+                        &nbsp;
                         <a href="{% url 'ride_confirm_delete' id=ride.id %}" alt="Delete Record">
-                            <i class="far fa-trash text-danger"></i>
+                            <i class="far fa-trash text-danger fa-lg"></i>
                         </a>
                     </td>
                 </tr>

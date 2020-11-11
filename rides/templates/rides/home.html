@@ -3,7 +3,11 @@
 {% block content %}
     <div class="jumbotron">
         <h1 class="display-4">Skyline</h1>
-        <a class="btn btn-primary" href="{% url 'ride_list' %}">View Your Rides</a>
-        <a class="btn btn-primary" href="{% url 'ride_new' %}">Add New Ride</a>
+        <a class="btn btn-primary" href="{% url 'ride_list' %}">
+            <i class="far fa-search"></i> View Your Rides
+        </a>
+        <a class="btn btn-primary" href="{% url 'ride_new' %}">
+            <i class="far fa-plus-circle"></i> Add New Ride
+        </a>
     </div>
 {% endblock %}

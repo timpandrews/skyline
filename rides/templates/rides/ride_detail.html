@@ -1,17 +1,104 @@
 {% extends 'rides/base.html' %}
+{% load ride_filters %}
 
 {% block content %}
     <h2>Ride Detail</h2>
-    <a class="btn btn-primary" href="{% url 'ride_edit' id=ride.id %}">Edit</a>
-    <a class="btn btn-danger" href="{% url 'ride_delete' id=ride.id %}">Delete</a>
-    <a class="btn btn-secondary" href="{% url 'ride_list' %}">Return</a>
-    <br/>
-    {{ ride.ride_date }} - {{ ride.title }} <br/>
-    {{ ride.discription }} <br/>
-    Time: {{ ride.duration }},
-    Distance: {{ ride.distance }},
-    Average Speed: {{ ride.average_speed }},
-    Calories: {{ ride.calories }} <br/>
-    {{ ride.notes }}
-
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Ride Info</h5>
+                        <p class="card-text">{{ ride.start_time}}</p>
+                        <p class="card-text">{{ ride.title }}</p>
+                        <p class="card-text">{{ ride.description }}</p>
+                    </div>
+                </div> <!-- /card -->
+            </div>
+        </div> <!-- /row -->
+        <div class="row">
+            <div class="col-lg-4 col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        Duration: {{ ride.duration|duration_string }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        Distance: {{ ride.distance }} mi
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        Elevation: {{ ride.elevation }} ft
+                    </div>
+                </div>
+            </div>
+        </div> <!-- /row -->
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Speed</h5>
+                        <p class="card-text">
+                            {{ ride.avg_speed }} mi <small>(Avg)</small><br>
+                            {{ ride.max_speed }} mi <small>(Max)</small>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Power</h5>
+                        <p class="card-text">
+                            {{ ride.avg_watts }} mi <small>(Avg)</small><br>
+                            {{ ride.max_watts }} mi <small>(Max)</small>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Heart Rate</h5>
+                        <p class="card-text">
+                            {{ ride.avg_heart_rate }} mi <small>(Avg)</small><br>
+                            {{ ride.max_heart_rate }} mi <small>(Max)</small>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Cadence</h5>
+                        <p class="card-text">
+                            {{ ride.avg_cadence }} mi <small>(Avg)</small><br>
+                            {{ ride.max_cadence }} mi <small>(Max)</small>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- /row -->
+        <div class="row">
+            <div class="col-12">
+                <br>
+                <a class="btn btn-primary" href="{% url 'ride_edit' id=ride.id %}">
+                    <i class="far fa-edit"></i> Edit
+                </a>
+                <a class="btn btn-danger" href="{% url 'ride_delete' id=ride.id %}">
+                    <i class="far fa-trash"></i> Delete
+                </a>
+                <a class="btn btn-secondary" href="{% url 'ride_list' %}">
+                    <i class="far fa-undo"></i> Return
+                </a>
+            </div>
+        </div> <!-- /row -->
+    </div> <!-- /container -->
+    <br>&nbsp;
 {% endblock %}

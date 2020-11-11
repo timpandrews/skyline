@@ -3,12 +3,15 @@
 {% block content %}
     <h2>Delete Ride</h2>
 
-    <span>Confirm deletion of ride:</span>
-    <a href="{% url 'ride_delete' id=ride.id %}">
-        <i class="far fa-trash fa-lg text-danger"></i>
-    </a>
-    <a href="{% url 'ride_list' %}">
-        <i class="far fa-undo fa-lg"></i>
-    </a>
+    <p>Confirm deletion of ride:</p>
+    <p>
+        <a class="btn btn-danger" href="{% url 'ride_delete' id=ride.id %}">
+            <i class="far fa-trash fa-lg"></i>&nbsp;Delete Ride
+        </a>
+        &nbsp;
+        <a class="btn btn-secondary" href="{% url 'ride_list' %}">
+            <i class="far fa-undo fa-lg"></i>&nbsp;Cancel
+        </a>
+    </p>
 
 {% endblock %}
