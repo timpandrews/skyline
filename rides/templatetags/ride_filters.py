@@ -6,7 +6,10 @@ register = template.Library()
 @register.filter(name='duration_string')
 def duration_string(duration):
     """
-
+    take a duration as a datetime object and convert
+    to a formated string XXh XXm or XXm XXs
+    duration:                   datetime object
+    return:duration_string      string
     """
     seconds = duration.seconds
     min, sec = divmod(seconds, 60)
@@ -22,5 +25,3 @@ def duration_string(duration):
         duration_string = f"{min}m {sec}s"
 
     return duration_string
-
-    return 'test'
