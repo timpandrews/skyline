@@ -1,16 +1,51 @@
 {% extends 'rides/base.html' %}
+{% load ride_filters %}
 
 {% block content %}
     <h2>Ride List</h2>
+    <div class="card bg-light">
+        <div class="card-body">
+            <p class="card-text">
+                Listing of all rides in Skyline app
+            </p>
+        </div>
+    </div>
 
-    {% for ride in rides %}
-        <div class="ride">
-            {{ ride.start_time }} - <a href="{% url 'ride_detail' id=ride.id %}">{{ ride.title}}</a>
-        </div>
-    {% empty %}
-        <div class="ride">
-            <span class="empty">No ride data is available</span>
-        </div>
-    {% endfor %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Ride Date</th>
+                <th scope="col">Name</th>
+                <th scope="col">Distance</th>
+                <th scope="col">Duration</th>
+                <th scope="col">Calories</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ride in rides %}
+                <tr>
+                    <td>{{ ride.start_time }}</td>
+                    <td>{{ ride.title}}</td>
+                    <td>{{ ride.distance }} mi</td>
+                    <td>{{ ride.duration|duration_string }}</td>
+                    <td>{{ ride.calories }}</td>
+                    <td>
+                        <a href="{% url 'ride_detail' id=ride.id %}" alt="View Detail">
+                            <i class="fas fa-clipboard-list-check"></i>
+                        </a>
+                        <a href="{% url 'ride_confirm_delete' id=ride.id %}" alt="Delete Record">
+                            <i class="far fa-trash text-danger"></i>
+                        </a>
+                    </td>
+                </tr>
+            {% empty  %}
+                <td colspan="5">
+                    <span class="empty">No ride data is available</span>
+                </td>
+            {% endfor %}
+
+        </tbody>
+    </table>
 {% endblock %}
 

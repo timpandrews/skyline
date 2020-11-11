@@ -1,0 +1,14 @@
+{% extends 'rides/base.html' %}
+
+{% block content %}
+    <h2>Delete Ride</h2>
+
+    <span>Confirm deletion of ride:</span>
+    <a href="{% url 'ride_delete' id=ride.id %}">
+        <i class="far fa-trash fa-lg text-danger"></i>
+    </a>
+    <a href="{% url 'ride_list' %}">
+        <i class="far fa-undo fa-lg"></i>
+    </a>
+
+{% endblock %}

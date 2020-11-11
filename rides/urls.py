@@ -8,6 +8,7 @@ urlpatterns = [
     path('ride/new/', views.ride_new, name='ride_new'),
     path('ride/<int:id>/edit/', views.ride_edit, name='ride_edit'),
     path('ride/<int:id>/delete/', views.ride_delete, name='ride_delete'),
+    path('ride/<int:id>/ride_confirm_delete/', views.ride_confirm_delete, name='ride_confirm_delete'),
     path('import_ride', views.import_ride, name='import_ride'),
     path('import_ride_add', views.import_ride_add, name='import_ride_add'),
     path('charts', views.charts, name='charts'),

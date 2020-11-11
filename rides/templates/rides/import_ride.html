@@ -2,7 +2,7 @@
 
 {% block content %}
     <h2>Import Rides</h2>
-    <div class="card w-75 bg-primary">
+    <div class="card bg-light">
         <div class="card-body">
             <h5 class="card-title">Import Rides from Zwift</h5>
             <p class="card-text">
@@ -12,51 +12,21 @@
         </div>
     </div>
 
-    <table class="table">
+    <table class="table table-striped">
         <thead>
             <tr>
-                <th scope="col"></th>
-                <th scope="col">Status</th>
                 <th scope="col">World</th>
                 <th scope="col">Ride Description</th>
                 <th scope="col">Date</th>
                 <th scope="col">Duration</th>
                 <th scope="col">Distance</th>
+                <th scope="col">Status</th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
             {% for ride in context.rides %}
                 <tr>
-                    {% if ride.status == 'new' %}
-                        <td scope="col">
-                            <a class="btn btn-success" href="/import_ride_add?id={{ ride.id }}" role="button" alt="import this ride">
-                                <i class="fas fa-check-circle"></i>
-                            </a>
-                        </td>
-                        <td scope="col">
-                            New
-                        </td>
-                    {% elif ride.status == 'present' %}
-                        <td scope="col">
-                            <button class="btn btn-primary" disabled>
-                                <i class="fas fa-check-circle"></i>
-                            </button>
-                        </td>
-                        <td scope="col">
-                            Present
-                        </td>
-                    {% else %}
-                        <td scope="col">
-                            <button class="btn btn-warning" disabled>
-                                <i class="fas fa-exclamation-circle"></i>
-                            </button>
-                        </td>
-                        <td scope="col">
-                            Error
-                        </td>
-                    {% endif %}
-
-
                     <td scope="col">
                         {{ ride.zwift_world }}
                     </td>
@@ -72,6 +42,34 @@
                     <td scope="col">
                         {{ ride.distance }} mi
                     </td>
+                    {% if ride.status == 'new' %}
+                        <td scope="col">
+                            New
+                        </td>
+                        <td scope="col">
+                            <a class="btn btn-success" href="/import_ride_add?id={{ ride.id }}" role="button" alt="import this ride">
+                                <i class="fas fa-check-circle"></i>
+                            </a>
+                        </td>
+                    {% elif ride.status == 'present' %}
+                        <td scope="col">
+                            Present
+                        </td>
+                        <td scope="col">
+                            <button class="btn btn-primary" disabled>
+                                <i class="far fa-thumbs-up"></i>
+                            </button>
+                        </td>
+                    {% else %}
+                        <td scope="col">
+                            Error
+                        </td>
+                        <td scope="col">
+                            <button class="btn btn-warning" disabled>
+                                <i class="fas fa-exclamation-circle"></i>
+                            </button>
+                        </td>
+                    {% endif %}
                 </tr>
             {% endfor %}
         </tbody>

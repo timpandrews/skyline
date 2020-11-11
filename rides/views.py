@@ -46,6 +46,11 @@ def ride_edit(request, id):
     return render(request, 'rides/ride_edit.html', {'form': form})
 
 
+def ride_confirm_delete(request, id):
+    ride = get_object_or_404(Ride, id=id)
+    return render(request, 'rides/ride_confirm_delete.html', {'ride': ride})
+
+
 def ride_delete(request, id):
     ride = get_object_or_404(Ride, id=id)
     ride.delete()
@@ -120,9 +125,11 @@ def import_ride_add(request):
         try:
             ride.save()
             ride = get_object_or_404(Ride, id=ride.id)
+
             context = {
                 'ride': ride,
                 'status': 'success',
+                'msg': 'Ride successfully imported'
             }
         except Exception as e:
             print(f'{e.message,} ({type(e)})')
@@ -131,7 +138,7 @@ def import_ride_add(request):
                 'status': 'fail'
             }
 
-        return render(request, 'rides/import_ride_confirmation.html', {'context': context} )
+        return render(request, 'rides/import_ride_confirmation.html', {'context': context})
 
 
 def view_data(request):

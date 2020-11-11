@@ -6,7 +6,7 @@
         <div class="alert alert-success" role="alert">
             Successfully imported ride <strong>{{ context.ride.title }}({{ context.ride.ride_date }})</strong>
         </div>
-        <a href="ride/238">View Ride Detail</a>
+        <a href="ride/{{ context.ride.id }}">View Ride Detail</a>
     {% else %}
         <div class="alert alert-danger" role="alert">
             Failed to imported ride
