@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
+import json
 import requests
 from datetime import datetime, timedelta, date
 from rides.models import Ride
@@ -161,7 +162,6 @@ def view_data(request):
         'meta': meta,
         'fit_data': fit_data,
     }
-    print(activities)
 
     return render(request, 'rides/view_data.html', {'context': context})
 
