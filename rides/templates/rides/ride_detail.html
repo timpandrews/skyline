@@ -4,14 +4,23 @@
 {% block content %}
     <h2>Ride Detail</h2>
     <div class="container-fluid">
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </ul>
+        {% endif %}
         <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Ride Info</h5>
-                        <p class="card-text">{{ ride.start_time}}</p>
-                        <p class="card-text">{{ ride.title }}</p>
-                        <p class="card-text">{{ ride.description }}</p>
+                        <p class="card-text">{{ context.ride.start_time}}</p>
+                        <p class="card-text">{{ context.ride.title }}</p>
+                        <p class="card-text">{{ context.ride.description }}</p>
                     </div>
                 </div> <!-- /card -->
             </div>
@@ -20,21 +29,21 @@
             <div class="col-lg-4 col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        Duration: {{ ride.duration|duration_string }}
+                        Duration: {{ context.ride.duration|duration_string }}
                     </div>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        Distance: {{ ride.distance }} mi
+                        Distance: {{ context.ride.distance }} mi
                     </div>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        Elevation: {{ ride.elevation }} ft
+                        Elevation: {{ context.ride.elevation }} ft
                     </div>
                 </div>
             </div>
@@ -45,8 +54,8 @@
                     <div class="card-body">
                         <h5 class="card-title">Speed</h5>
                         <p class="card-text">
-                            {{ ride.avg_speed }} mi <small>(Avg)</small><br>
-                            {{ ride.max_speed }} mi <small>(Max)</small>
+                            {{ context.ride.avg_speed }} mi <small>(Avg)</small><br>
+                            {{ context.ride.max_speed }} mi <small>(Max)</small>
                         </p>
                     </div>
                 </div>
@@ -56,8 +65,8 @@
                     <div class="card-body">
                         <h5 class="card-title">Power</h5>
                         <p class="card-text">
-                            {{ ride.avg_watts }} mi <small>(Avg)</small><br>
-                            {{ ride.max_watts }} mi <small>(Max)</small>
+                            {{ context.ride.avg_watts }} mi <small>(Avg)</small><br>
+                            {{ context.ride.max_watts }} mi <small>(Max)</small>
                         </p>
                     </div>
                 </div>
@@ -67,8 +76,8 @@
                     <div class="card-body">
                         <h5 class="card-title">Heart Rate</h5>
                         <p class="card-text">
-                            {{ ride.avg_heart_rate }} mi <small>(Avg)</small><br>
-                            {{ ride.max_heart_rate }} mi <small>(Max)</small>
+                            {{ context.ride.avg_heart_rate }} mi <small>(Avg)</small><br>
+                            {{ context.ride.max_heart_rate }} mi <small>(Max)</small>
                         </p>
                     </div>
                 </div>
@@ -78,8 +87,8 @@
                     <div class="card-body">
                         <h5 class="card-title">Cadence</h5>
                         <p class="card-text">
-                            {{ ride.avg_cadence }} mi <small>(Avg)</small><br>
-                            {{ ride.max_cadence }} mi <small>(Max)</small>
+                            {{ context.ride.avg_cadence }} mi <small>(Avg)</small><br>
+                            {{ context.ride.max_cadence }} mi <small>(Max)</small>
                         </p>
                     </div>
                 </div>
@@ -88,14 +97,17 @@
         <div class="row">
             <div class="col-12">
                 <br>
-                <a class="btn btn-primary" href="{% url 'ride_edit' id=ride.id %}">
+                <a class="btn btn-primary" href="{% url 'ride_edit' id=context.ride.id %}">
                     <i class="far fa-edit"></i> Edit
                 </a>
-                <a class="btn btn-danger" href="{% url 'ride_delete' id=ride.id %}">
+                <a class="btn btn-danger" href="{% url 'ride_delete' id=context.ride.id %}">
                     <i class="far fa-trash"></i> Delete
                 </a>
                 <a class="btn btn-secondary" href="{% url 'ride_list' %}">
-                    <i class="far fa-undo"></i> Return
+                    <i class="far fa-search"></i> View Your Rides
+                </a>
+                <a class="btn btn-secondary" href="{% url 'ride_list' %}">
+                    <i class="far fa-file-import"></i> Import Rides
                 </a>
             </div>
         </div> <!-- /row -->

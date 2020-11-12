@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
 import requests
 from datetime import datetime, timedelta, date
@@ -15,7 +16,10 @@ def ride_list(request):
 
 def ride_detail(request, id):
     ride = get_object_or_404(Ride, id=id)
-    return render(request, 'rides/ride_detail.html', {'ride': ride})
+    context = {
+        'ride': ride,
+    }
+    return render(request, 'rides/ride_detail.html', {'context': context})
 
 
 def ride_new(request):
@@ -48,7 +52,7 @@ def ride_edit(request, id):
 
 def ride_confirm_delete(request, id):
     ride = get_object_or_404(Ride, id=id)
-    return render(request, 'rides/ride_confirm_delete.html', {'ride': ride})
+    return render(request, 'rides/ride_confirm_delete.html', {'context': context})
 
 
 def ride_delete(request, id):
@@ -125,7 +129,7 @@ def import_ride_add(request):
         try:
             ride.save()
             ride = get_object_or_404(Ride, id=ride.id)
-
+            messages.success(request, "Ride was successfully imported")
             context = {
                 'ride': ride,
                 'status': 'success',
@@ -138,7 +142,7 @@ def import_ride_add(request):
                 'status': 'fail'
             }
 
-        return render(request, 'rides/import_ride_confirmation.html', {'context': context})
+        return render(request, 'rides/ride_detail.html', {'context': context})
 
 
 def view_data(request):

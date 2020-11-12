@@ -47,8 +47,8 @@
                             New
                         </td>
                         <td scope="col">
-                            <a class="btn btn-success" href="/import_ride_add?id={{ ride.id }}" role="button" alt="import this ride">
-                                <i class="far fa-plus-circle"></i>
+                            <a href="/import_ride_add?id={{ ride.id }}" role="button" alt="import this ride">
+                                <i class="far fa-plus-circle text-success"></i>
                             </a>
                         </td>
                     {% elif ride.status == 'present' %}
@@ -56,9 +56,7 @@
                             Present
                         </td>
                         <td scope="col">
-                            <button class="btn btn-primary" disabled>
-                                <i class="fas fa-check-circle"></i>
-                            </button>
+                            <i class="fas fa-check-circle text-primary"></i>
                         </td>
                     {% else %}
                         <td scope="col">
