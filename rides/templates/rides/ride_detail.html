@@ -100,13 +100,13 @@
                 <a class="btn btn-primary" href="{% url 'ride_edit' id=context.ride.id %}">
                     <i class="far fa-edit"></i> Edit
                 </a>
-                <a class="btn btn-danger" href="{% url 'ride_delete' id=context.ride.id %}">
+                <a class="btn btn-danger" href="{% url 'ride_confirm_delete' id=context.ride.id %}">
                     <i class="far fa-trash"></i> Delete
                 </a>
                 <a class="btn btn-secondary" href="{% url 'ride_list' %}">
                     <i class="far fa-search"></i> View Your Rides
                 </a>
-                <a class="btn btn-secondary" href="{% url 'ride_list' %}">
+                <a class="btn btn-secondary" href="{% url 'import_ride' %}">
                     <i class="far fa-file-import"></i> Import Rides
                 </a>
             </div>

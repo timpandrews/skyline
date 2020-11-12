@@ -5,9 +5,13 @@
 
     <form method="POST" class="ride-form">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button class="btn btn-primary" type="submit">Save</button>
-        <a class="btn btn-secondary" href="{% url 'ride_list' %}">Cancel</a>
+        <table>{{ form.as_table }}</table>
+        <button class="btn btn-primary" type="submit">
+            <i class="far fa-save"></i> Save
+        </button>
+        <a class="btn btn-secondary" href="{% url 'ride_list' %}">
+            <i class="far fa-times-circle"></i> Cancel
+        </a>
     </form>
 
 {% endblock %}

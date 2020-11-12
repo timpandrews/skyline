@@ -1,3 +1,4 @@
 Django==3.1
 requests==2.24
 zwift-client==0.2.0
+django-crispy-forms==1.9.2

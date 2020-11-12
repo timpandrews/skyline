@@ -52,6 +52,9 @@ def ride_edit(request, id):
 
 def ride_confirm_delete(request, id):
     ride = get_object_or_404(Ride, id=id)
+    context = {
+        'ride': ride,
+    }
     return render(request, 'rides/ride_confirm_delete.html', {'context': context})
 
 
