@@ -1,0 +1,16 @@
+{% extends 'rides/base.html' %}
+
+{% block content %}
+    <div class="jumbotron">
+        <h1 class="display-4">Skyline</h1>
+        <h2>Log In</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-primary" type="submit">
+                <i class="far fa-sign-in"></i> Log In
+            </button>
+        </form>
+    </div>
+
+{% endblock %}

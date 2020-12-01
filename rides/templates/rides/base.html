@@ -34,6 +34,15 @@
                     <i class="far fa-plus-circle"></i> Add New Ride
                 </a>
             </div>
+            <div>
+                {% if user.is_authenticated %}
+                    Hi {{ user.username }}!
+                    <p><a href="{% url 'logout' %}">Log Out</a></p>
+                {% else %}
+                    <p>You are not logged in</p>
+                    <a href="{% url 'login' %}">Log In</a>
+                {% endif %}
+            </div>
         </div>
     </nav>
     <div class="content container-fluid">
