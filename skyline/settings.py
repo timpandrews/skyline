@@ -25,7 +25,7 @@ SECRET_KEY = 'i(9&u9saw-p51gse6(z6w!b%xp5srk*wubrzha2mmu^ku0c9#c'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','localhost']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -119,12 +119,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-# Authentication
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
-EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
-EMAIL_FILE_PATH = str(BASE_DIR.joinpath('sent_emails'))
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
@@ -137,11 +131,14 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 #
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-#
-TEMPLATE_DIRS = [
-    os.path.join(BASE_DIR, 'templates/'),
-]
 
-print('bd:', BASE_DIR)
-print('td:', TEMPLATE_DIRS)
+# Authentication
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'sent_emails')
+
+print('BASE_DIR:', BASE_DIR)
+# print('EMAIL_FILE_PATH:', EMAIL_FILE_PATH)
+
 
