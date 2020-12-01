@@ -60,7 +60,7 @@ ROOT_URLCONF = 'skyline.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -119,9 +119,11 @@ USE_L10N = True
 
 USE_TZ = True
 
-# Login Redirects
+# Authentication
 LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/' # new
+LOGOUT_REDIRECT_URL = '/'
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = str(BASE_DIR.joinpath('sent_emails'))
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
@@ -134,3 +136,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 #
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+#
+TEMPLATE_DIRS = [
+    os.path.join(BASE_DIR, 'templates/'),
+]
+
+print('bd:', BASE_DIR)
+print('td:', TEMPLATE_DIRS)
+
