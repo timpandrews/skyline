@@ -28,19 +28,15 @@
                 <a class="nav-link" href="{% url 'import_ride' %}">Import Ride</a>
                 <a class="nav-link" href="{% url 'charts' tab='default'%}">Charts</a>
                 <a class="nav-link" href="{% url 'view_data' %}">View Data</a>
+                <a class="nav-link" href="{% url 'ride_new' %}">Add New Ride</a>
             </div>
             <div class="navbar-nav ml-auto">
-                <a class="nav-item btn btn-primary" href="{% url 'ride_new' %}">
-                    <i class="far fa-plus-circle"></i> Add New Ride
-                </a>
-            </div>
-            <div>
                 {% if user.is_authenticated %}
                     Hi {{ user.username }}!
-                    <p><a href="{% url 'logout' %}">Log Out</a></p>
+                    <a class="ml-1" href="{% url 'logout' %}">Log Out</a>
                 {% else %}
-                    <p>You are not logged in</p>
-                    <a href="{% url 'login' %}">Log In</a>
+                    You are not logged in
+                    <a class="ml-1" href="{% url 'login' %}">Log In</a>
                 {% endif %}
             </div>
         </div>
