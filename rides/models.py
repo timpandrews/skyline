@@ -1,13 +1,16 @@
 from django.conf import settings
 from django.contrib.auth import get_user_model
-from django.contrib.auth.models import User
+from accounts.models import CustomUser
 from django.db import models
 from django.utils import timezone
 
-# Create your models here.
-
 
 class Ride(models.Model):
+    user = models.ForeignKey(
+        get_user_model(),
+        on_delete=models.CASCADE,
+        null=True,
+    )
     ride_type = models.CharField(max_length=10)
     ride_native_id = models.CharField(max_length=200)
     start_time = models.DateTimeField()

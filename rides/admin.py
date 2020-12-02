@@ -6,6 +6,7 @@ from rides.models import Ride
 class RideAdmin(admin.ModelAdmin):
     list_display = (
         'title',
+        'user',
         'id',
         'start_time',
         'description',

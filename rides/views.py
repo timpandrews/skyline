@@ -11,12 +11,12 @@ def home(request):
 
 
 def ride_list(request):
-    rides = Ride.objects.all().order_by('-start_time')
+    rides = Ride.objects.filter(user=request.user).order_by('-start_time')
     return render(request, 'rides/ride_list.html', {'rides': rides})
 
 
 def ride_detail(request, id):
-    ride = get_object_or_404(Ride, id=id)
+    ride = get_object_or_404(Ride.objects.filter(user=request.user), id=id)
     context = {
         'ride': ride,
     }
@@ -28,6 +28,7 @@ def ride_new(request):
         form = RideForm(request.POST)
         if form.is_valid():
             ride = form.save(commit=False)
+            ride.user = request.user
             print("******")
             print(ride)
             print('*****')
@@ -39,7 +40,7 @@ def ride_new(request):
 
 
 def ride_edit(request, id):
-    ride = get_object_or_404(Ride, id=id)
+    ride = get_object_or_404(Ride.objects.filter(user=request.user), id=id)
     if request.method == "POST":
         form = RideForm(request.POST, instance=ride)
         if form.is_valid():
@@ -52,7 +53,7 @@ def ride_edit(request, id):
 
 
 def ride_confirm_delete(request, id):
-    ride = get_object_or_404(Ride, id=id)
+    ride = get_object_or_404(Ride.objects.filter(user=request.user), id=id)
     context = {
         'ride': ride,
     }
@@ -60,7 +61,7 @@ def ride_confirm_delete(request, id):
 
 
 def ride_delete(request, id):
-    ride = get_object_or_404(Ride, id=id)
+    ride = get_object_or_404(Ride.objects.filter(user=request.user), id=id)
     ride.delete()
     return redirect('ride_list')
 
@@ -111,6 +112,7 @@ def import_ride_add(request):
     if zwift_ride_id:
         print("***************")
         ride = Ride.objects.create(
+            user=request.user,
             ride_type='zwift',
             ride_native_id=zwift_ride_id,
             start_time=zrd['startDate'],
@@ -132,7 +134,7 @@ def import_ride_add(request):
         )
         try:
             ride.save()
-            ride = get_object_or_404(Ride, id=ride.id)
+            ride = get_object_or_404(Ride.objects.filter(user=request.user), id=id)
             messages.success(request, "Ride was successfully imported")
             context = {
                 'ride': ride,
@@ -278,7 +280,7 @@ def get_ride_status(id, ride_type):
 
     """
     if ride_type == 'zwift':
-         if Ride.objects.filter(ride_native_id=id):
+         if Ride.objects.filter(ride_native_id=id).filter(user=request.user):
              status = "present"
          else:
              status = "new"
