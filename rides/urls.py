@@ -11,6 +11,7 @@ urlpatterns = [
     path('ride/<int:id>/ride_confirm_delete/', views.ride_confirm_delete, name='ride_confirm_delete'),
     path('import_ride', views.import_ride, name='import_ride'),
     path('import_ride_add', views.import_ride_add, name='import_ride_add'),
+    path('import_all_rides', views.import_all_rides, name='import_all_rides'),
     path('charts/<str:tab>', views.charts, name='charts'),
     path('view_data', views.view_data, name='view_data'),
 ]

@@ -66,11 +66,22 @@ def ride_delete(request, id):
     return redirect('ride_list')
 
 
+def import_all_rides(request):
+    messages.warning(request, "Importing all Zwift Rides")
+    context = {
+        'msg': 'Nothing done yet'
+    }
+    return render(request, 'rides/import_all_confirmation.html', {'context': context})
+
+
 def import_ride(request):
     zwift, zwift_id = init_zwift_client()
     profile = zwift.get_profile()
     profile_data = profile.profile
+    # default limit
     activities = profile.get_activities()
+    # get all activities
+
 
     rides = []
     for i, activity in enumerate(activities):

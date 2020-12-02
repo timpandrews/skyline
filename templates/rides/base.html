@@ -29,6 +29,7 @@
                 <a class="nav-link" href="{% url 'charts' tab='default'%}">Charts</a>
                 <a class="nav-link" href="{% url 'view_data' %}">View Data</a>
                 <a class="nav-link" href="{% url 'ride_new' %}">Add New Ride</a>
+                <a class="nav-link" href="{% url 'import_all_rides' %}">Import All Rides</a>
             </div>
             <div class="navbar-nav ml-auto">
                 {% if user.is_authenticated %}
