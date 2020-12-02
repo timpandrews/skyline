@@ -79,7 +79,7 @@ def import_ride(request):
 
             rides.append({
                 'id': activity['id'],
-                'status': get_ride_status(activity['id'], 'zwift'),
+                'status': get_ride_status(activity['id'], 'zwift', request.user),
                 'name': activity['name'],
                 'zwift_world': get_zwift_world(activity['worldId']),
                 'date': activity['startDate'],
@@ -106,11 +106,8 @@ def import_ride_add(request):
     zwift, zwift_id = init_zwift_client()
     activity = zwift.get_activity(zwift_id)
     zrd = activity.get_activity(zwift_ride_id)  # ZwiftRideData (zrd)
-    print(zrd['totalElevation'])
-    print(zrd['totalElevation']*3.281)
 
     if zwift_ride_id:
-        print("***************")
         ride = Ride.objects.create(
             user=request.user,
             ride_type='zwift',
@@ -134,7 +131,7 @@ def import_ride_add(request):
         )
         try:
             ride.save()
-            ride = get_object_or_404(Ride.objects.filter(user=request.user), id=id)
+            ride = get_object_or_404(Ride.objects.filter(user=request.user), id=ride.id)
             messages.success(request, "Ride was successfully imported")
             context = {
                 'ride': ride,
@@ -143,6 +140,7 @@ def import_ride_add(request):
             }
         except Exception as e:
             print(f'{e.message,} ({type(e)})')
+            messages.warning(request, "Exception occured during ride import")
             context = {
                 'ride': ride,
                 'status': 'fail'
@@ -275,12 +273,12 @@ def get_miles_from_meters(meters):
     return miles
 
 
-def get_ride_status(id, ride_type):
+def get_ride_status(id, ride_type, user):
     """
 
     """
     if ride_type == 'zwift':
-         if Ride.objects.filter(ride_native_id=id).filter(user=request.user):
+         if Ride.objects.filter(ride_native_id=id).filter(user=user):
              status = "present"
          else:
              status = "new"
