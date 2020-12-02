@@ -34,6 +34,7 @@
                 {% if user.is_authenticated %}
                     Hi {{ user.username }}!
                     <a class="ml-1" href="{% url 'logout' %}">Log Out</a>
+                    {{ user.id }}
                 {% else %}
                     You are not logged in
                     <a class="ml-1" href="{% url 'login' %}">Log In</a>
