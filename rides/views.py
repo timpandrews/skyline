@@ -1,3 +1,5 @@
+import logging
+
 from datetime import datetime, timedelta
 
 from django.contrib import messages
@@ -5,6 +7,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 
 from rides.forms import RideForm
 from rides.models import Ride
+
+logger = logging.getLogger(__name__)
 
 
 def home(request):
@@ -94,10 +98,12 @@ def import_all_rides(request):
             })
         else:
             null_rides += 1
-            print('warning: null ride')
+            logger.warning('warning: null ride')
+
 
     for i, ride in enumerate(rides):
-        print(i, ride['date'])
+        # print(i, ride['date'])
+        logger.debug(f'debug: {i} {ride["date"]}')
         zwift_ride_id = ride['id']
         status = ride['status']
         zwift, zwift_id = init_zwift_client()
@@ -175,9 +181,7 @@ def import_ride(request):
                 'duration': get_duration_string(activity['movingTimeInMs'], 'ms'),
             })
         else:
-            print('warning: null ride')
-
-    # print(rides)
+            logger.warning('warning: null ride')
 
     context = {
         'profile': profile_data,
