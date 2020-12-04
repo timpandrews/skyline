@@ -1,10 +1,11 @@
+from datetime import datetime, timedelta
+
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
-import json
-import requests
-from datetime import datetime, timedelta, date
-from rides.models import Ride
+
 from rides.forms import RideForm
+from rides.models import Ride
+
 
 def home(request):
     return render(request, 'rides/home.html', {})
@@ -67,9 +68,85 @@ def ride_delete(request, id):
 
 
 def import_all_rides(request):
+    start = request.GET.get('start')
+    limit = request.GET.get('limit')
+    if start == None:
+        start = 0
+    if limit == None:
+        limit = 50
+
+    zwift, zwift_id = init_zwift_client()
+    profile = zwift.get_profile()
+    profile_data = profile.profile
+    # get all activities
+    activities = profile.get_activities(start=start, limit=limit)
+
+    rides = []
+    null_rides = 0
+    rides_imported = 0
+    for i, activity in enumerate(activities):
+        if activity['movingTimeInMs']:
+            rides.append({
+                'id': activity['id'],
+                'status': get_ride_status(activity['id'], 'zwift', request.user),
+                'date': activity['startDate'],
+                'ride_date': get_ride_date(activity['startDate']),
+            })
+        else:
+            null_rides += 1
+            print('warning: null ride')
+
+    for i, ride in enumerate(rides):
+        print(i, ride['date'])
+        zwift_ride_id = ride['id']
+        status = ride['status']
+        zwift, zwift_id = init_zwift_client()
+        activity = zwift.get_activity(zwift_id)
+        zrd = activity.get_activity(zwift_ride_id)  # ZwiftRideData (zrd)
+
+        if zwift_ride_id and status == 'new':
+            ride = Ride.objects.create(
+                user=request.user,
+                ride_type='zwift',
+                ride_native_id=zwift_ride_id,
+                start_time=zrd['startDate'],
+                title=zrd['name'],
+                description='',
+                duration=timedelta(seconds=zrd['movingTimeInMs'] / 1000),
+                distance=get_miles_from_meters(zrd['distanceInMeters']),
+                elevation=get_converted_value(zrd['totalElevation'], 'metersToFeet'),
+                avg_speed=get_miles_from_meters(zrd['avgSpeedInMetersPerSecond'] * 3600),
+                max_speed=get_miles_from_meters(zrd['maxSpeedInMetersPerSecond'] * 3600),
+                avg_heart_rate=zrd['avgHeartRate'],
+                max_heart_rate=zrd['maxHeartRate'],
+                avg_watts=zrd['avgWatts'],
+                max_watts=zrd['maxWatts'],
+                avg_cadence=zrd['avgCadenceInRotationsPerMinute'],
+                max_cadence=zrd['maxCadenceInRotationsPerMinute'],
+                calories=zrd['calories'],
+                notes=''
+            )
+            try:
+                # ride.save()
+                rides_imported += 1
+            except Exception as e:
+                print(f'{e.message,} ({type(e)})')
+                messages.warning(request, "Exception occured during ride import")
+
+
+    all_zwift_rides = len(rides)
+    next = int(start) + int(limit)
+    last_ride_date = zrd['startDate'][0:10]
+
     messages.warning(request, "Importing all Zwift Rides")
     context = {
-        'msg': 'Nothing done yet'
+        'msg': f'Total of {all_zwift_rides} rides available to be imported',
+        'start': start,
+        'limit': limit,
+        'next': next,
+        'null_rides': null_rides,
+        'rides_imported': rides_imported,
+        'last_ride_date': last_ride_date,
     }
     return render(request, 'rides/import_all_confirmation.html', {'context': context})
 
@@ -81,7 +158,6 @@ def import_ride(request):
     # default limit
     activities = profile.get_activities()
     # get all activities
-
 
     rides = []
     for i, activity in enumerate(activities):

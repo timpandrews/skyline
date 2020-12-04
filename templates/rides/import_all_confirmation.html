@@ -8,6 +8,19 @@
             <p class="card-text">
                 {{ context.msg }}
             </p>
+            <p>
+                <span class="ml-1">Start: {{ context.start }}</span>
+                <span class="ml-3">Limit: {{ context.limit }}</span>
+                <span class="ml-3">Next: {{ context.next }}</span>
+                <span class="ml-3">Null Rides: {{ context.null_rides }}</span>
+                <span class="ml-3">Rides Imported: {{ context.rides_imported }}</span>
+                <span class="ml-3">Last Ride Date: {{ context.last_ride_date}}</span>
+            </p>
+            <p>
+                <a class="btn btn-primary" href="{% url 'import_all_rides' %}?start={{ context.next }}&limit=50">
+                    <i class="far fa-layer-plus"></i> Get 50 More Rides
+                </a>
+            </p>
         </div>
     </div>
 
