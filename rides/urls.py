@@ -12,7 +12,7 @@ urlpatterns = [
     path('import_ride', views.import_ride, name='import_ride'),
     path('import_ride_add', views.import_ride_add, name='import_ride_add'),
     path('import_all_rides', views.import_all_rides, name='import_all_rides'),
-    path('charts/<str:tab>', views.charts, name='charts'),
+    path('analysis/<str:tab>', views.analysis, name='analysis'),
     path('view_data', views.view_data, name='view_data'),
 ]
 

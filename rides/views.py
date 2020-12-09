@@ -257,11 +257,11 @@ def view_data(request):
     return render(request, 'rides/view_data.html', {'context': context})
 
 
-def charts(request, tab):
+def analysis(request, tab):
     context = {
         'tab': tab
     }
-    return render(request, 'rides/charts.html', {'context': context})
+    return render(request, 'rides/analysis.html', {'context': context})
 
 
 def init_zwift_client():

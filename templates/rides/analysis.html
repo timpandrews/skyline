@@ -1,43 +1,43 @@
 {% extends 'rides/base.html' %}
 
 {% block content %}
-    <h2>Charts</h2>
+    <h2>Analysis</h2>
     <ul class="nav nav-tabs">
         <li class="nav-item">
             {% if context.tab == 'monthly' or context.tab == 'default' %}
-                <a class="nav-link active bg-secondary text-white" href="{% url 'charts' tab='monthly'%}">
+                <a class="nav-link active bg-secondary text-white" href="{% url 'analysis' tab='monthly'%}">
                     Monthly
                 </a>
             {% else %}
-                <a class="nav-link" href="{% url 'charts' tab='monthly'%}">
+                <a class="nav-link" href="{% url 'analysis' tab='monthly'%}">
                     Monthly
                 </a>
             {% endif %}
         </li>
         <li class="nav-item">
             {% if context.tab == 'tab2' %}
-                <a class="nav-link active bg-secondary text-white" href="{% url 'charts' tab='tab2'%}">Tab2</a>
+                <a class="nav-link active bg-secondary text-white" href="{% url 'analysis' tab='tab2'%}">Tab2</a>
             {% else %}
-                <a class="nav-link" href="{% url 'charts' tab='tab2'%}">Tab2</a>
+                <a class="nav-link" href="{% url 'analysis' tab='tab2'%}">Tab2</a>
             {% endif %}
         </li>
         <li class="nav-item">
             {% if context.tab == 'tab3' %}
-                <a class="nav-link active bg-secondary text-white" href="{% url 'charts' tab='tab3'%}">
+                <a class="nav-link active bg-secondary text-white" href="{% url 'analysis' tab='tab3'%}">
                     Tab3
                 </a>
             {% else %}
-                <a class="nav-link" href="{% url 'charts' tab='tab3'%}">
+                <a class="nav-link" href="{% url 'analysis' tab='tab3'%}">
                     Tab3
                 </a>
             {% endif %}
         </li>
     </ul>
     {% if context.tab == 'monthly' or context.tab == 'default' %}
-        {% include 'rides/chart_monthly.html' %}
+        {% include 'rides/analysis_monthly.html' %}
     {% elif context.tab == 'tab2' %}
-        {% include 'rides/chart_tab2.html' %}
+        {% include 'rides/analysis_tab2.html' %}
     {% elif context.tab == 'tab3' %}
-        {% include 'rides/chart_tab3.html' %}
+        {% include 'rides/analysis_tab3.html' %}
     {% endif %}
 {% endblock %}
