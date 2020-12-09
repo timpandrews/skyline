@@ -4,13 +4,13 @@
     <h2>Analysis</h2>
     <ul class="nav nav-tabs">
         <li class="nav-item">
-            {% if context.tab == 'monthly' or context.tab == 'default' %}
+            {% if context.tab == 'general' or context.tab == 'default' %}
                 <a class="nav-link active bg-secondary text-white" href="{% url 'analysis' tab='monthly'%}">
-                    Monthly
+                    General
                 </a>
             {% else %}
-                <a class="nav-link" href="{% url 'analysis' tab='monthly'%}">
-                    Monthly
+                <a class="nav-link" href="{% url 'analysis' tab='general'%}">
+                    General
                 </a>
             {% endif %}
         </li>
@@ -33,8 +33,8 @@
             {% endif %}
         </li>
     </ul>
-    {% if context.tab == 'monthly' or context.tab == 'default' %}
-        {% include 'rides/analysis_monthly.html' %}
+    {% if context.tab == 'general' or context.tab == 'default' %}
+        {% include 'rides/analysis_general.html' %}
     {% elif context.tab == 'tab2' %}
         {% include 'rides/analysis_tab2.html' %}
     {% elif context.tab == 'tab3' %}

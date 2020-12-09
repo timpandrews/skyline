@@ -14,6 +14,7 @@ class Ride(models.Model):
     ride_type = models.CharField(max_length=10)
     ride_native_id = models.CharField(max_length=200)
     start_time = models.DateTimeField()
+    # ride_date = models.DateField()
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True)
     duration = models.DurationField()
