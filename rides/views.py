@@ -261,7 +261,10 @@ def view_data(request):
 def analysis(request, tab):
 
     # get yearly totals
-    currentYear = datetime.now().year
+    # currentYear = datetime.now().year
+    # todo: get year to work correctly
+    currentYear = 2020
+    print("currentYear:", currentYear)
     yearly_totals = get_yearly_totals(currentYear)
 
     context = {

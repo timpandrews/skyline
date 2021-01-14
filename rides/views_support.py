@@ -1,6 +1,7 @@
 import logging
-from django.db.models import Sum
 from datetime import datetime, timedelta
+
+from django.db.models import Sum
 
 from rides.models import Ride
 
@@ -135,16 +136,18 @@ def get_yearly_totals(year):
     """
     get yearly totals such as distance, num of rides, num of days riden, etc.
     """
-    # Number of Rides
-    distance = Ride.objects.filter(start_time__range=["2020-01-01", "2020-12-31"]).aggregate(Sum('distance'))
+    # todo: get year to work, pull from functions parameter
+    print("year:", year)
+    # Distance
+    distance = Ride.objects.filter(start_time__range=["2021-01-01", "2021-12-31"]).aggregate(Sum('distance'))
     distance = round(distance["distance__sum"], 2)
 
 
     # Number of Rides
-    num_rides = Ride.objects.filter(start_time__range=["2020-01-01", "2020-12-31"]).count
+    num_rides = Ride.objects.filter(start_time__range=["2021-01-01", "2021-12-31"]).count
 
     # Numbers of Days
-    # num_days = Ride.objects.filter(start_time__range=["2020-01-01", "2020-12-31"]).distinct('start_time')
+    # num_days = Ride.objects.filter(start_time__range=["2021-01-01", "2021-12-31"]).distinct('start_time')
 
 
     yearly_totals = {
