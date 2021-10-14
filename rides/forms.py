@@ -1,5 +1,6 @@
 from django import forms
-from rides.models import Ride
+from rides.models import Ride, Health
+from tempus_dominus.widgets import DatePicker, TimePicker, DateTimePicker
 
 class RideForm(forms.ModelForm):
 
@@ -24,4 +25,17 @@ class RideForm(forms.ModelForm):
             'max_cadence',
             'calories',
             'notes',
+        )
+
+
+class HealthForm(forms.ModelForm):
+
+    class Meta:
+        model = Health
+        fields = (
+            'health_type',
+            'health_value1',
+            'health_value2',
+            'health_date',
+            'health_notes'
         )

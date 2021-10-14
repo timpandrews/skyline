@@ -1,0 +1,9 @@
+{% extends 'rides/base.html' %}
+
+{% block content %}
+    <h2>Health</h2>
+
+    <a class="btn btn-primary" href="{% url 'health_new' %}">
+        <i class="fas fa-heartbeat"></i> Add New Health Point
+    </a>
+{% endblock %}
