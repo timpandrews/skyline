@@ -1,0 +1,25 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Subject: Password reset on 127.0.0.1:8000
+From: webmaster@localhost
+To: timpandrews@yahoo.com
+Date: Tue, 01 Dec 2020 19:25:18 -0000
+Message-ID: <160685071822.25437.5786176833152393353@royal-purple.localdomain>
+
+
+You're receiving this email because you requested a password reset for your user account at 127.0.0.1:8000.
+
+Please go to the following page and choose a new password:
+
+http://127.0.0.1:8000/accounts/reset/MQ/ae7he6-092f7c766e63e174dd0ee829c8818e9e/
+
+Your username, in case you’ve forgotten: tim
+
+Thanks for using our site!
+
+The 127.0.0.1:8000 team
+
+
+
+-------------------------------------------------------------------------------
