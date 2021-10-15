@@ -6,8 +6,8 @@ django-crispy-forms==1.9.2
 django-fontawesome-5==1.0.18
 django-tempus-dominus==5.1.2.14
 fitparse==1.2.0
+gunicorn==20.1.0
 idna==2.10
-pkg_resources==0.0.0
 protobuf==3.13.0
 psycopg2-binary==2.9.1
 pysolr==3.9.0
