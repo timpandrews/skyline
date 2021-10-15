@@ -87,6 +87,7 @@ def health_new(request):
         form = HealthForm()
     return render(request, 'rides/health_edit.html', {'form': form})
 
+
 def ride_edit(request, id):
     ride = get_object_or_404(Ride.objects.filter(user=request.user), id=id)
     if request.method == "POST":
@@ -139,6 +140,7 @@ def import_all_rides(request):
                 'date': activity['startDate'],
                 'ride_date': get_ride_date(activity['startDate']),
             })
+            logger.warning('ride imported')
         else:
             null_rides += 1
             logger.warning('warning: null ride')
