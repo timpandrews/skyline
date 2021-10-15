@@ -19,17 +19,8 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'i(9&u9saw-p51gse6(z6w!b%xp5srk*wubrzha2mmu^ku0c9#c'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
-
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -75,20 +66,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'skyline.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'skyline',
-        'USER': 'postgres',
-        'PASSWORD': 'admin321',
-        'HOST': '127.0.0.1',
-    }
-}
 
 
 # Password validation
@@ -143,7 +120,19 @@ EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'sent_emails')
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
-print('BASE_DIR:', BASE_DIR)
+# print('BASE_DIR:', BASE_DIR)
 # print('EMAIL_FILE_PATH:', EMAIL_FILE_PATH)
+
+# Local Settings
+try:
+    from .dev_settings import *
+except ImportError:
+    pass
+
+try:
+    from .prod_settings import *
+except ImportError:
+    pass
+
 
 

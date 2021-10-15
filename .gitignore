@@ -3,3 +3,5 @@ _env/
 __*
 !__init__.py
 credlib.py
+dev_settings.py
+prod_settings.py
