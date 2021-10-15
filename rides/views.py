@@ -9,12 +9,9 @@ from rides.forms import RideForm, HealthForm
 from rides.models import Ride, Health
 from rides.views_support import *
 
-import pysolr
 
 logger = logging.getLogger(__name__)
 
-# create solr instance
-solr = pysolr.Solr('http://localhost:8983/solr/skyline', timeout=10)
 
 def home(request):
 
