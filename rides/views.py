@@ -3,6 +3,7 @@ import logging
 from datetime import datetime, timedelta
 
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 
 from rides.forms import RideForm, HealthForm
@@ -39,12 +40,13 @@ def home(request):
 
     return render(request, 'rides/home.html', {})
 
-
+@login_required()
 def ride_list(request):
     rides = Ride.objects.filter(user=request.user).order_by('-start_time')
     return render(request, 'rides/ride_list.html', {'rides': rides})
 
 
+@login_required()
 def ride_detail(request, id):
     ride = get_object_or_404(Ride.objects.filter(user=request.user), id=id)
     context = {
@@ -53,6 +55,7 @@ def ride_detail(request, id):
     return render(request, 'rides/ride_detail.html', {'context': context})
 
 
+@login_required()
 def ride_new(request):
     if request.method == "POST":
         form = RideForm(request.POST)
@@ -69,6 +72,7 @@ def ride_new(request):
     return render(request, 'rides/ride_edit.html', {'form': form})
 
 
+@login_required()
 def health_new(request):
     if request.method == "POST":
         form = HealthForm(request.POST)
@@ -85,6 +89,7 @@ def health_new(request):
     return render(request, 'rides/health_edit.html', {'form': form})
 
 
+@login_required()
 def ride_edit(request, id):
     ride = get_object_or_404(Ride.objects.filter(user=request.user), id=id)
     if request.method == "POST":
@@ -98,6 +103,7 @@ def ride_edit(request, id):
     return render(request, 'rides/ride_edit.html', {'form': form})
 
 
+@login_required()
 def ride_confirm_delete(request, id):
     ride = get_object_or_404(Ride.objects.filter(user=request.user), id=id)
     context = {
@@ -106,12 +112,14 @@ def ride_confirm_delete(request, id):
     return render(request, 'rides/ride_confirm_delete.html', {'context': context})
 
 
+@login_required()
 def ride_delete(request, id):
     ride = get_object_or_404(Ride.objects.filter(user=request.user), id=id)
     ride.delete()
     return redirect('ride_list')
 
 
+@login_required()
 def import_all_rides(request):
     start = request.GET.get('start')
     limit = request.GET.get('limit')
@@ -199,6 +207,7 @@ def import_all_rides(request):
     return render(request, 'rides/import_all_confirmation.html', {'context': context})
 
 
+@login_required()
 def import_ride(request):
     zwift, zwift_id = init_zwift_client()
     profile = zwift.get_profile()
@@ -234,6 +243,7 @@ def import_ride(request):
     return render(request, 'rides/import_ride.html', {'context': context})
 
 
+@login_required()
 def import_ride_add(request):
     zwift_ride_id = request.GET.get('id')
     zwift, zwift_id = init_zwift_client()
@@ -282,6 +292,7 @@ def import_ride_add(request):
         return render(request, 'rides/ride_detail.html', {'context': context})
 
 
+@login_required()
 def view_data(request):
     zwift, zwift_id = init_zwift_client()
     activity = zwift.get_activity(zwift_id)
@@ -299,6 +310,7 @@ def view_data(request):
     return render(request, 'rides/view_data.html', {'context': context})
 
 
+@login_required()
 def analysis(request, tab):
 
     # get yearly totals
@@ -315,6 +327,7 @@ def analysis(request, tab):
     return render(request, 'rides/analysis.html', {'context': context})
 
 
+@login_required()
 def health(request):
     """
 
