@@ -34,7 +34,7 @@ INSTALLED_APPS = [
     # apps
     'accounts',
     'rides',
-
+    'pages',
 ]
 
 MIDDLEWARE = [
