@@ -14,32 +14,6 @@ from rides.views_support import *
 logger = logging.getLogger(__name__)
 
 
-def home(request):
-
-    # Test Solr Code
-    # print(solr, 'home')
-    # solr.ping()
-    # print('ping')
-    #
-    # solr.delete(q='*:*')
-    #
-    # solr.add([
-    #     {
-    #         "id": "doc_1",
-    #         "title": "A test document",
-    #     },
-    # ])
-    # solr.commit()
-    #
-    # results = solr.search(q='*:*')
-    # print("Saw {0} result(s).".format(len(results)))
-    # print(results)
-    # for result in results:
-    #     print('result', result)
-    #     print(result['title'])
-
-    return render(request, 'rides/home.html', {})
-
 @login_required()
 def ride_list(request):
     rides = Ride.objects.filter(user=request.user).order_by('-start_time')
