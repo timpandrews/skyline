@@ -1,1 +1,24 @@
-<h1>Landing</h1>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Landing w/background image -->
+<div class="bg-image" style="background-image: url({% static 'img/skyline.jpg' %})">
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-md-7 mx-auto text-center align-self-center">
+                <h1 class="font-weight-bold mb-0 text-white">Skyline</h1>
+                <p class="text-white lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse iure possimus cum illum ab accusantium, aliquid, delectus tempora.</p>
+                <a class="btn btn-purple" href="{% url 'login' %}">
+                    <span class="icon-home mr-1"></span>
+                    Login&nbsp;&nbsp;
+                </a>
+                <a class="btn btn-purple" href="{% url 'signup' %}">
+                    <span class="icon-user mr-1"></span>
+                    Sign Up
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

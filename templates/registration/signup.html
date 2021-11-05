@@ -1,16 +1,23 @@
-{% extends 'rides/base.html' %}
+{% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-    <div class="jumbotron">
-        <h1 class="display-4">Skyline</h1>
-        <h2>Sign Up</h2>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button class="btn btn-primary" type="submit">
-                <i class="far fa-user-plus"></i> Sign Up
-            </button>
-        </form>
+<div class="bg-image" style="background-image: url({% static 'img/skyline.jpg' %})">
+    <div class="container">
+        <div class="row justify-content-center align-items-center ">
+            <div class="row justify-content-center bg-light border-0 border-purple rounded" style="padding: 20px; opacity: 0.8;">
+                <form method="post">
+                    <h1 class="display-4">Skyline</h1>
+                    <h2>Sign Up</h2>
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button class="btn btn-primary" type="submit">
+                        <i class="far fa-user-plus"></i> Sign Up
+                    </button>
+                </form>
+            </div>
+        </div>
     </div>
+</div>
 
 {% endblock %}

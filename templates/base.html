@@ -1,0 +1,21 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Skyline</title>
+    {% include 'partials/_head.html' %}
+</head>
+<body>
+
+<div class="container-fluid">
+    {% block content %}
+    {% endblock %}
+
+    {% include 'partials/_footer.html' %}
+</div>
+
+{% include 'partials/_scripts.html' %}
+
+</body>
+</html>

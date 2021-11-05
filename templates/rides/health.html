@@ -1,6 +1,9 @@
-{% extends 'rides/base.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
+
+    {% include 'partials/_navigation.html' %}
+
     <h2>Health</h2>
 
     <a class="btn btn-primary" href="{% url 'health_new' %}">

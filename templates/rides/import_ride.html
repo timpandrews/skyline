@@ -1,6 +1,9 @@
-{% extends 'rides/base.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
+
+    {% include 'partials/_navigation.html' %}
+
     <h2>Import Rides</h2>
     <div class="card bg-light">
         <div class="card-body">
@@ -27,7 +30,11 @@
             {% for ride in context.rides %}
                 <tr>
                     <td scope="col">
-                        {{ ride.zwift_world }}
+                        {% if ride.zwift_world == 'WorldID9' %}
+                            Makuri Islands
+                        {% else %}
+                            {{ ride.zwift_world }}
+                        {% endif %}
                     </td>
                     <td scope="col">
                         {{ ride.name }}
@@ -46,7 +53,7 @@
                             New
                         </td>
                         <td scope="col">
-                            <a href="/import_ride_add?id={{ ride.id }}" role="button" alt="import this ride">
+                            <a href="import_ride_add?id={{ ride.id }}" role="button" alt="import this ride">
                                 <i class="far fa-plus-circle text-success"></i>
                             </a>
                         </td>

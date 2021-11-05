@@ -1,6 +1,9 @@
-{% extends 'rides/base.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
+
+    {% include 'partials/_navigation.html' %}
+
     <h2>Import Ride</h2>
     {% if context.status == 'success' %}
         <div class="alert alert-success" role="alert">

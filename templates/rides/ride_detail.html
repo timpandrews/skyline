@@ -1,7 +1,10 @@
-{% extends 'rides/base.html' %}
+{% extends 'base.html' %}
 {% load ride_filters %}
 
 {% block content %}
+
+    {% include 'partials/_navigation.html' %}
+
     <h2>Ride Detail</h2>
     <div class="container-fluid">
         {% if messages %}
