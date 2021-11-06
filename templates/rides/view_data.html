@@ -7,6 +7,21 @@
     <h2>View Raw Data</h2>
     <div class="card">
         <div class="card-header bg-primary text-white">
+            Urls
+        </div>
+        <div class="card-body">
+            <p class="card-text">
+                <ul>
+                    {% for url in context.urls %}
+                        <li>{{ url }}</li>
+                    {% endfor %}
+                </ul>
+            </p>
+        </div>
+    </div>
+    <br>
+    <div class="card">
+        <div class="card-header bg-primary text-white">
             Ride Zwift Meta Data
         </div>
         <div class="card-body">
