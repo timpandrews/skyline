@@ -8,8 +8,8 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 
-from rides.forms import RideForm, HealthForm
-from rides.models import Ride, Health
+from rides.forms import RideForm
+from rides.models import Ride
 from rides.views_support import *
 
 
@@ -46,25 +46,6 @@ def ride_new(request):
     else:
         form = RideForm()
     return render(request, 'rides/ride_edit.html', {'form': form})
-
-
-@login_required()
-def health_new(request):
-    if request.method == "POST":
-        form = HealthForm(request.POST)
-        if form.is_valid():
-            health = form.save(commit=False)
-            health.user = request.user
-            print("******")
-            print(health)
-            print('*****')
-            health.save()
-
-            context = {}
-            return render(request, 'rides/health.html', {'context': context})
-    else:
-        form = HealthForm()
-    return render(request, 'rides/health_edit.html', {'form': form})
 
 
 @login_required()
@@ -325,16 +306,6 @@ def analysis(request, tab):
         'yearly_totals': yearly_totals,
     }
     return render(request, 'rides/analysis.html', {'context': context})
-
-
-@login_required()
-def health(request):
-    """
-
-    """
-    context = {}
-
-    return render(request, 'rides/health.html', {'context': context})
 
 
 # def init_zwift_client():

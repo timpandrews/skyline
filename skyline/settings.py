@@ -33,8 +33,12 @@ INSTALLED_APPS = [
     'tempus_dominus',
     # apps
     'accounts',
-    'rides',
+    'admin_tools',
+    'dashboard',
+    'garage',
+    'health',
     'pages',
+    'rides',
 ]
 
 MIDDLEWARE = [
