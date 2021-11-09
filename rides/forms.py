@@ -30,6 +30,19 @@ class RideForm(forms.ModelForm):
 
 class HealthForm(forms.ModelForm):
 
+    health_date = forms.DateTimeField(
+        widget=DateTimePicker(
+            options={
+                'useCurrent': True,
+                'collapse': False,
+            },
+            attrs={
+                'append': 'fa fa-calendar',
+                'icon_toggle': True,
+            }
+        ),
+    )
+
     class Meta:
         model = Health
         fields = (

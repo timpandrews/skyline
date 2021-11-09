@@ -59,7 +59,9 @@ def health_new(request):
             print(health)
             print('*****')
             health.save()
-            return redirect(ride_detail, id=ride.id)
+
+            context = {}
+            return render(request, 'rides/health.html', {'context': context})
     else:
         form = HealthForm()
     return render(request, 'rides/health_edit.html', {'form': form})
