@@ -15,18 +15,73 @@
             <a class="nav-link" href="{% url 'import_ride' %}">Import Ride</a>
             <a class="nav-link" href="{% url 'health' %}">Health</a>
             <a class="nav-link" href="{% url 'dashboard' tab='default'%}">Dashboard</a>
-            <a class="nav-link" href="{% url 'view_data' %}">View Data</a>
             <a class="nav-link" href="{% url 'ride_new' %}">Add New Ride</a>
-            <a class="nav-link" href="{% url 'import_all_rides' %}">Import All Rides</a>
         </div>
         <div class="navbar-nav ml-auto">
             {% if user.is_authenticated %}
-                Hi {{ user.username }}!
-                <a class="ml-1" href="{% url 'logout' %}">Log Out</a>
+                <li class="nav-item mr-3 ">
+                    Hi {{ user.username }}!
+                    <a class="ml-1" href="{% url 'logout' %}">Log Out</a>
+                </li>
             {% else %}
-                You are not logged in
-                <a class="ml-1" href="{% url 'login' %}">Log In</a>
+                <li class="nav-item mr-3 ">
+                    You are not logged in
+                    <a class="ml-1" href="{% url 'login' %}">Log In</a>
+                </li>
+            {% endif %}
+            {% if user.is_superuser %}
+                <li class="nav-item mr-3 ">
+                    <a class="nav-link dropdown-toggle" href="{% url 'admin:index' %}" id="navbarAdminDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-cogs"></i> Admin
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarAdminDropdown">
+                        <a class="dropdown-item" href="{% url 'admin:index' %}">Django Admin</a>
+                        <a class="dropdown-item" href="{% url 'view_data' %}">View Data</a>
+                        <a class="dropdown-item" href="{% url 'import_all_rides' %}">Import All Rides</a>
+                    </div>
+                </li>
             {% endif %}
         </div>
     </div>
 </nav>
+
+<nav class="navbar  px-4 navbar-expand-lg navbar-dark bg-purple mb-4">
+        <a class="navbar-brand" href="{% url 'home' %}">Skyline</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon">s</span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Dropdown
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                </li>
+            </ul>
+            <form class="form-inline form-search my-2 my-lg-0 ml-auto d-flex">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn" type="submit">
+                    <span class="icon-search"></span>
+                </button>
+            </form>
+        </div>
+    </nav>
