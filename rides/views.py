@@ -10,7 +10,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 
 from rides.forms import RideForm
 from rides.models import Ride
-from rides.views_support import *
+from skyline.views_support import *
 
 
 logger = logging.getLogger(__name__)
@@ -289,23 +289,6 @@ def view_data(request):
     }
 
     return render(request, 'rides/view_data.html', {'context': context})
-
-
-@login_required()
-def analysis(request, tab):
-
-    # get yearly totals
-    # currentYear = datetime.now().year
-    # todo: get year to work correctly
-    currentYear = 2020
-    print("currentYear:", currentYear)
-    yearly_totals = get_yearly_totals(currentYear)
-
-    context = {
-        'tab': tab,
-        'yearly_totals': yearly_totals,
-    }
-    return render(request, 'rides/analysis.html', {'context': context})
 
 
 # def init_zwift_client():

@@ -4,43 +4,43 @@
 
     {% include 'partials/_navigation.html' %}
 
-    <h2>Analysis</h2>
+    <h2>Dashboard</h2>
     <ul class="nav nav-tabs">
         <li class="nav-item">
             {% if context.tab == 'general' or context.tab == 'default' %}
-                <a class="nav-link active bg-secondary text-white" href="{% url 'analysis' tab='monthly'%}">
+                <a class="nav-link active bg-secondary text-white" href="{% url 'dashboard' tab='monthly'%}">
                     General
                 </a>
             {% else %}
-                <a class="nav-link" href="{% url 'analysis' tab='general'%}">
+                <a class="nav-link" href="{% url 'dashboard' tab='general'%}">
                     General
                 </a>
             {% endif %}
         </li>
         <li class="nav-item">
             {% if context.tab == 'tab2' %}
-                <a class="nav-link active bg-secondary text-white" href="{% url 'analysis' tab='tab2'%}">Tab2</a>
+                <a class="nav-link active bg-secondary text-white" href="{% url 'dashboard' tab='tab2'%}">Tab2</a>
             {% else %}
-                <a class="nav-link" href="{% url 'analysis' tab='tab2'%}">Tab2</a>
+                <a class="nav-link" href="{% url 'dashboard' tab='tab2'%}">Tab2</a>
             {% endif %}
         </li>
         <li class="nav-item">
             {% if context.tab == 'tab3' %}
-                <a class="nav-link active bg-secondary text-white" href="{% url 'analysis' tab='tab3'%}">
+                <a class="nav-link active bg-secondary text-white" href="{% url 'dashboard' tab='tab3'%}">
                     Tab3
                 </a>
             {% else %}
-                <a class="nav-link" href="{% url 'analysis' tab='tab3'%}">
+                <a class="nav-link" href="{% url 'dashboard' tab='tab3'%}">
                     Tab3
                 </a>
             {% endif %}
         </li>
     </ul>
     {% if context.tab == 'general' or context.tab == 'default' %}
-        {% include 'rides/analysis_general.html' %}
+        {% include 'dashboard/dashboard_general.html' %}
     {% elif context.tab == 'tab2' %}
-        {% include 'rides/analysis_tab2.html' %}
+        {% include 'dashboard/dashboard_tab2.html' %}
     {% elif context.tab == 'tab3' %}
-        {% include 'rides/analysis_tab3.html' %}
+        {% include 'dashboard/dashboard_tab3.html' %}
     {% endif %}
 {% endblock %}
