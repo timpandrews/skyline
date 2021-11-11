@@ -5,6 +5,9 @@ from accounts.models import CustomUser
 
 
 class Health(models.Model):
+    class Meta:
+        verbose_name_plural = "health"
+
     HEALTH_TYPE = (
         ('weight', 'weight'),
         ('bp', 'bp'),
