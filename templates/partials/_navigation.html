@@ -1,57 +1,59 @@
 {% load static %}
 
 <nav class="navbar  px-4 navbar-expand-lg navbar-dark bg-purple mb-4">
-        <a class="navbar-brand text-primary" href="{% url 'home' %}">Skyline</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon">s</span>
-        </button>
+    <a class="navbar-brand" href="{% url 'home' %}">
+        <h1 class="brand_1">Skyline</h1>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Rides
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{% url 'ride_list' %}">Ride List</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{% url 'import_ride' %}">Import Rides</a>
+                    <a class="dropdown-item" href="{% url 'ride_new' %}">Add New Ride</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'health' %}">Health</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'dashboard' tab='default'%}">Dashboard</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            {% if user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+                    <span class="navbar-brand">Hi {{ user.username }}!</span>
+                    <a class="" href="{% url 'logout' %}" style="font-weight:bold; color:Cyan" >Log Out</a>
+                    &nbsp;&nbsp;
                 </li>
+            {% endif %}
+            {% if user.is_superuser %}
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Rides
+                        <i class="fas fa-cogs"></i> Admin
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{% url 'ride_list' %}">Ride List</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{% url 'import_ride' %}">Import Rides</a>
-                        <a class="dropdown-item" href="{% url 'ride_new' %}">Add New Ride</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="{% url 'admin:index' %}">Django Admin</a>
+                        <a class="dropdown-item" href="{% url 'view_data' %}">View Data</a>
+                        <a class="dropdown-item" href="{% url 'import_all_rides' %}">Import All Rides</a>
                     </div>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'health' %}">Health</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'dashboard' tab='default'%}">Dashboard</a>
-                </li>
-            </ul>
-            <ul class="navbar-nav ml-auto">
-                {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <span class="navbar-brand">Hi {{ user.username }}!</span>
-                        <a class="" href="{% url 'logout' %}" style="font-weight:bold; color:Cyan" >Log Out</a>
-                        &nbsp;&nbsp;
-                    </li>
-                {% endif %}
-                {% if user.is_superuser %}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-cogs"></i> Admin
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="{% url 'admin:index' %}">Django Admin</a>
-                            <a class="dropdown-item" href="{% url 'view_data' %}">View Data</a>
-                            <a class="dropdown-item" href="{% url 'import_all_rides' %}">Import All Rides</a>
-                        </div>
-                    </li>
-                {% endif %}
-            </ul>
-        </div>
-    </nav>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
