@@ -32,6 +32,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'dashboard' tab='default'%}">Dashboard</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'garage' %}">Garage</a>
+            </li>
         </ul>
         <ul class="navbar-nav ml-auto">
             {% if user.is_authenticated %}
