@@ -1,6 +1,7 @@
 from django import forms
+
 from rides.models import Ride
-from tempus_dominus.widgets import DatePicker, TimePicker, DateTimePicker
+
 
 class RideForm(forms.ModelForm):
 

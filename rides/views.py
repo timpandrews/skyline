@@ -1,13 +1,9 @@
-import logging
-
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 
 from rides.forms import RideForm
-from rides.models import Ride
 from skyline.views_support import *
-
 
 logger = logging.getLogger(__name__)
 

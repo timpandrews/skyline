@@ -1,10 +1,9 @@
-from django.shortcuts import render
 from django.conf import settings
-from django.urls import URLPattern, URLResolver
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
+from django.urls import URLPattern, URLResolver
 
 from skyline.views_support import *
-
 
 @login_required()
 def view_data(request):

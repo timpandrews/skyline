@@ -1,6 +1,8 @@
-from django.db import models
 from django.contrib.auth import get_user_model
+from django.db import models
+
 from accounts.models import CustomUser
+
 
 class Health(models.Model):
     HEALTH_TYPE = (

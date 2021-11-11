@@ -1,6 +1,7 @@
 from django import forms
+from tempus_dominus.widgets import DateTimePicker
+
 from health.models import Health
-from tempus_dominus.widgets import DatePicker, TimePicker, DateTimePicker
 
 
 class HealthForm(forms.ModelForm):

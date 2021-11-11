@@ -1,8 +1,7 @@
-from django.conf import settings
 from django.contrib.auth import get_user_model
-from accounts.models import CustomUser
 from django.db import models
-from django.utils import timezone
+
+from accounts.models import CustomUser
 
 
 class Ride(models.Model):

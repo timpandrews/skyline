@@ -1,4 +1,5 @@
 from django.urls import path
+
 from rides import views
 
 urlpatterns = [
